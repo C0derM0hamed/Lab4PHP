@@ -13,7 +13,7 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h3 class="card-title mb-4 text-center">Add Student</h3>
-                    <form action="save.php" method="POST">
+                    <form id="studentForm" action="save.php" method="POST" onsubmit="return validateForm('studentForm')">
                         <div class="mb-3">
                             <label class="form-label">First Name:</label>
                             <input type="text" name="FirstName" class="form-control" />
@@ -29,6 +29,7 @@
                         <div class="mb-3">
                             <label class="form-label">Country:</label>
                             <select name="country" class="form-select">
+                                <option value="">-- Select Country --</option>
                                 <option value="Cairo">Cairo</option>
                                 <option value="Asuit">Asuit</option>
                                 <option value="Alexandria">Alexandria</option>
@@ -69,6 +70,11 @@
                             <input type="text" name="username" class="form-control" />
                         </div>
                         <div class="mb-3">
+                            <label class="form-label">Password:</label>
+                            <input type="password" name="password" class="form-control" />
+                            <div class="form-text">Exactly 8 characters: lowercase letters, numbers, and underscore only.</div>
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">Department:</label>
                             <input type="text" name="department" value="OpenSource" class="form-control" readonly />
                         </div>
@@ -83,5 +89,6 @@
         </div>
     </div>
 </div>
+<script src="validate.js"></script>
 </body>
 </html>

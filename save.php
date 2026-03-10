@@ -3,11 +3,11 @@ require_once "Database.php";
 
 $db = \Database::getInstance()->getConnection();
 
-if(!isset($_POST['FirstName']) || !isset($_POST['LastName']) || !isset($_POST['Address']) || !isset($_POST['country']) || !isset($_POST['Gender']) || !isset($_POST['skills']) || !isset($_POST['username']) || !isset($_POST['department'])){
+if(!isset($_POST['FirstName']) || !isset($_POST['LastName']) || !isset($_POST['Address']) || !isset($_POST['country']) || !isset($_POST['Gender']) || !isset($_POST['skills']) || !isset($_POST['username']) || !isset($_POST['password']) || !isset($_POST['department'])){
     echo "Please fill in all the fields.";
     exit;
 }
-if(empty($_POST['FirstName']) || empty($_POST['LastName']) || empty($_POST['Address']) || empty($_POST['country']) || empty($_POST['Gender']) || empty($_POST['skills']) || empty($_POST['username']) || empty($_POST['department'])){
+if(empty($_POST['FirstName']) || empty($_POST['LastName']) || empty($_POST['Address']) || empty($_POST['country']) || empty($_POST['Gender']) || empty($_POST['skills']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['department'])){
     echo "Please fill in all the fields.";
     exit;
 }
@@ -19,11 +19,12 @@ $country = trim($_POST['country']);
 $gender = trim($_POST['Gender']);
 $skills = implode(",", array_map('trim', $_POST['skills']));
 $username = trim($_POST['username']);
+$password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
 $department = trim($_POST['department']);
 
 
 
-$sql = "INSERT INTO students (first_name, last_name, address, country, gender, skills, username, department) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO students (first_name, last_name, address, country, gender, skills, username, password, department) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $statment = $db->prepare($sql);
 
@@ -36,6 +37,7 @@ $statment->execute([
         $gender,
         $skills,
         $username,
+        $password,
         $department]);
 
     header("Location: list.php");

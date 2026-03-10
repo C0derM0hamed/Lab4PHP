@@ -46,7 +46,7 @@ try {
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h3 class="card-title mb-4 text-center">Edit Student</h3>
-                    <form action="update.php" method="POST">
+                    <form id="editForm" action="update.php" method="POST" onsubmit="return validateForm('editForm')">
                         <input type="hidden" name="id" value="<?= $student['id'] ?>">
                         <div class="mb-3">
                             <label class="form-label">First Name:</label>
@@ -117,5 +117,6 @@ try {
         </div>
     </div>
 </div>
+<script src="validate.js"></script>
 </body>
 </html>
